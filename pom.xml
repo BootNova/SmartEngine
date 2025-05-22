@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.alibaba.smart.framework</groupId>
+    <groupId>com.bootnova.smart.framework</groupId>
     <artifactId>smart-engine</artifactId>
     <!--  mvn versions:set -DnewVersion=2.7.2-SNAPSHOT -DgenerateBackupPoms=false  -->
     <!--  mvn versions:set -DnewVersion=3.6.0-SNAPSHOT -DgenerateBackupPoms=false  -->
@@ -14,13 +14,13 @@
     <name>Smart Engine</name>
     <description>SmartEngine is a lightweight business orchestration engine written in Java</description>
 
-    <url>https://github.com/alibaba/SmartEngine</url>
+    <url>https://github.com.bootnova/SmartEngine</url>
     <inceptionYear>2016</inceptionYear>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com:alibaba/SmartEngine.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:alibaba/SmartEngine.git</developerConnection>
-        <url>https://github.com/alibaba/SmartEngine/tree/master</url>
+        <connection>scm:git:ssh://git@github.com.bootnova/SmartEngine.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com.bootnova/SmartEngine.git</developerConnection>
+        <url>https://github.com.bootnova/SmartEngine/tree/master</url>
     </scm>
 
     <developers>
@@ -405,7 +405,7 @@
                     <relocations>
                         <relocation>
                             <pattern>com.esotericsoftware.reflectasm</pattern>
-                            <shadedPattern>com.alibaba.smart.framework.engine.shaded.com.esotericsoftware.reflectasm
+                            <shadedPattern>com.bootnova.smart.framework.engine.shaded.com.esotericsoftware.reflectasm
                             </shadedPattern>
                         </relocation>
                     </relocations>

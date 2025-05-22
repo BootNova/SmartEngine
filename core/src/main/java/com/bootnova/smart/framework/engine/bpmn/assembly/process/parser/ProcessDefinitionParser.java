@@ -1,0 +1,99 @@
+package com.bootnova.smart.framework.engine.bpmn.assembly.process.parser;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
+import com.bootnova.smart.framework.engine.bpmn.assembly.process.ProcessDefinitionImpl;
+import com.bootnova.smart.framework.engine.common.util.CollectionUtil;
+import com.bootnova.smart.framework.engine.common.util.MapUtil;
+import com.bootnova.smart.framework.engine.common.util.StringUtil;
+import com.bootnova.smart.framework.engine.configuration.aware.ProcessEngineConfigurationAware;
+import com.bootnova.smart.framework.engine.exception.EngineException;
+import com.bootnova.smart.framework.engine.extension.annoation.ExtensionBinding;
+import com.bootnova.smart.framework.engine.extension.constant.ExtensionConstant;
+import com.bootnova.smart.framework.engine.model.assembly.BaseElement;
+import com.bootnova.smart.framework.engine.model.assembly.ExtensionElements;
+import com.bootnova.smart.framework.engine.model.assembly.IdBasedElement;
+import com.bootnova.smart.framework.engine.model.assembly.ProcessDefinition;
+import com.bootnova.smart.framework.engine.xml.parser.AbstractElementParser;
+import com.bootnova.smart.framework.engine.xml.parser.ParseContext;
+import com.bootnova.smart.framework.engine.xml.util.XmlParseUtil;
+
+@ExtensionBinding(group = ExtensionConstant.ELEMENT_PARSER, bindKey = ProcessDefinitionImpl.class)
+
+public class ProcessDefinitionParser extends AbstractElementParser<ProcessDefinition> implements
+    ProcessEngineConfigurationAware {
+
+    @Override
+    public Class<ProcessDefinition> getModelType() {
+        return ProcessDefinition.class;
+    }
+
+    @Override
+    public ProcessDefinition parseElement(XMLStreamReader reader, ParseContext context) throws XMLStreamException {
+
+        ProcessDefinition processDefinition = new ProcessDefinitionImpl();
+        processDefinition.setId(XmlParseUtil.getString(reader, "id"));
+
+        String version = XmlParseUtil.getString(reader, "version");
+
+        String versionTag = XmlParseUtil.getString(reader, "versionTag");
+
+        //优先使用versionTag；versionTag是 camunda等设计器的特性，此处是为了兼容。
+        if(StringUtil.isNotEmpty(versionTag)){
+            processDefinition.setVersion(versionTag);
+        }else {
+            processDefinition.setVersion(version);
+        }
+
+        processDefinition.setName(XmlParseUtil.getString(reader, "name"));
+
+
+        Map<String, String> properties = XmlParseUtil.parseExtendedProperties(reader, context);
+        processDefinition.setProperties(properties);
+
+
+        List<BaseElement> elements = CollectionUtil.newArrayList();
+
+        Map<String, IdBasedElement> idBasedElementMap = MapUtil.newLinkedHashMap();
+
+        while (XmlParseUtil.nextChildElement(reader)) {
+            Object element = this.readElement(reader, context);
+            if (element instanceof BaseElement) {
+
+                if(element instanceof ExtensionElements){
+                    processDefinition.setExtensionElements((ExtensionElements)element);
+                }
+
+
+                elements.add((BaseElement) element);
+                if(element instanceof IdBasedElement){
+                    IdBasedElement idBasedElement = (IdBasedElement)element;
+
+                    String id = idBasedElement.getId();
+
+                    if(StringUtil.isEmpty(id)){
+                        throw new EngineException(" id cant be null :"+idBasedElement);
+                    }
+
+                    if(null != idBasedElementMap.get(id)){
+                        throw new EngineException("duplicated id found:"+idBasedElement.getId());
+                    }else{
+                        idBasedElementMap.put(idBasedElement.getId(), idBasedElement);
+
+                    }
+
+                }
+            }
+        }
+
+        processDefinition.setBaseElementList(elements);
+        processDefinition.setIdBasedElementMap(idBasedElementMap);
+
+        return processDefinition;
+    }
+
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alibaba.smart.framework.engine.persister.database.dao.ExecutionInstanceDAO">
+<mapper namespace="com.bootnova.smart.framework.engine.persister.database.dao.ExecutionInstanceDAO">
 
     <!-- income_transition_id,income_activity_instance_id, -->
     <sql id="baseColumn">
@@ -11,7 +11,7 @@
 
     <!-- #{incomeTransitionId},#{incomeActivityInstanceId}, -->
     <insert id="insert"
-            parameterType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity"
+            parameterType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity"
             keyProperty="id">
         insert into se_execution_instance(<include refid="baseColumn"/>)
         values (#{id}, #{gmtCreate}, #{gmtModified}, #{processInstanceId}, #{processDefinitionIdAndVersion},
@@ -27,7 +27,7 @@
     </delete>
 
     <update id="update"
-            parameterType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            parameterType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         update se_execution_instance
         <set>
             gmt_modified=now(6)
@@ -38,7 +38,7 @@
     </update>
 
     <select id="findOne"
-            resultType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            resultType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         select
         <include refid="baseColumn"/>
         from se_execution_instance
@@ -48,7 +48,7 @@
 
 
     <select id="findWithShading"
-            resultType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            resultType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         select
         <include refid="baseColumn"/>
         from se_execution_instance
@@ -58,7 +58,7 @@
     </select>
 
     <select id="findAllExecutionList"
-            resultType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            resultType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         select
         <include refid="baseColumn"/>
         from se_execution_instance
@@ -67,7 +67,7 @@
     </select>
 
     <select id="findActiveExecution"
-            resultType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            resultType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         select
         <include refid="baseColumn"/>
         from se_execution_instance
@@ -77,7 +77,7 @@
     </select>
 
     <select id="findByActivityInstanceId"
-            resultType="com.alibaba.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
+            resultType="com.bootnova.smart.framework.engine.persister.database.entity.ExecutionInstanceEntity">
         select
         <include refid="baseColumn"/>
         from se_execution_instance
