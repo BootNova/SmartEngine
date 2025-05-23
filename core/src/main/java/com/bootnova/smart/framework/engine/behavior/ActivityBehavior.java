@@ -14,7 +14,6 @@ public interface ActivityBehavior {
      * 仅创建 ei 等相关对象，
      * @param context
      * @param pvmActivity
-     * @return
      */
     boolean enter(ExecutionContext context, PvmActivity pvmActivity);
 
@@ -23,7 +22,6 @@ public interface ActivityBehavior {
      * 更新 ei 对象，
      * @param context
      * @param pvmActivity
-     * @return
      */
     void execute(ExecutionContext context, PvmActivity pvmActivity);
 
@@ -31,7 +29,6 @@ public interface ActivityBehavior {
      *  在 leave 时，判断如何创建后续节点
      * @param context
      * @param pvmActivity
-     * @return
      */
     void leave(ExecutionContext context, PvmActivity pvmActivity);
 

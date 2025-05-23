@@ -23,7 +23,7 @@ public interface DeploymentCommandService {
     /**
      *
      * 更新部署实例,但是不涉及修改部署实例的部署状态(比如说 active,inactive)
-     * 另外,在更新时, 如果部署实例的部署状态是 active, 则解析流程定义并部署到本地内存中.如果部署实例的部署状态是 inactive, 则<bold>不会解析流程定义<bold/>.
+     * 另外,在更新时, 如果部署实例的部署状态是 active, 则解析流程定义并部署到本地内存中.如果部署实例的部署状态是 inactive, 则不会解析流程定义.
      * @param updateDeploymentCommand
      * @return
      */

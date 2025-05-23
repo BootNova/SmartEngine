@@ -4,7 +4,6 @@ import java.util.Date;
 
 /**
  * @author JannLim
- * @time 2020/11/17 14:21
  */
 public class ObjectUtil {
 

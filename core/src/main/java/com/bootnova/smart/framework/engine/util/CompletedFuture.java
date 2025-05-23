@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author guoxing
  * @date 2021/1/14
- * @description 描述
  */
 public class CompletedFuture<T> implements Future<T> {
     private final T v;

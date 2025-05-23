@@ -5,7 +5,7 @@ import com.bootnova.smart.framework.engine.exception.LockException;
 
 /**
  * Created by 高海军 帝奇 74394 on 2017 October  06:20.
- * @Deprecated The granularity of the LockStrategy is too small,should NOT use anymore.
+ * @deprecated The granularity of the LockStrategy is too small,should NOT use anymore.
  */
 
 @Deprecated

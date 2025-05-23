@@ -6,8 +6,6 @@ import java.util.concurrent.Callable;
 
 /**
  * @author yfcchilly
- * @date 2020/8/31
- * @description 描述
  */
 public abstract class InheritableTaskWithCache implements Callable<Void> {
     private Object obj;
